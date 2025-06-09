@@ -7,21 +7,20 @@ interface Ship {
 
 function Ship(length: number): Ship {
   let isSunk = false;
-  let health = length;
+  let hits = 0;
   if (length <= 0 || !Number.isInteger(length)) {
-    health = 0;
+    hits = 0;
     length = 0;
     isSunk = true;
   }
 
   return {
     hit: (): void => {
-      if (health > 0) health--;
-      if (health === 0) isSunk = true;
+      if (hits < length) hits += 1;
     },
-    getLength: () => length,
-    getHealth: () => health,
-    getIsSunk: () => isSunk,
+    getLength: (): number => length,
+    getHealth: (): number => length - hits,
+    getIsSunk: (): boolean => (length - hits === 0 ? true : false),
   };
 }
 
