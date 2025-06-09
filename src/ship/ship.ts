@@ -1,11 +1,11 @@
-interface Ship {
+interface IShip {
   hit: () => void;
   getLength: () => number;
   getHealth: () => number;
   getIsSunk: () => boolean;
 }
 
-function Ship(length: number): Ship {
+function createShip(length: number): IShip {
   let isSunk = false;
   let hits = 0;
   if (length <= 0 || !Number.isInteger(length)) {
@@ -24,4 +24,4 @@ function Ship(length: number): Ship {
   };
 }
 
-export default Ship;
+export default createShip;
