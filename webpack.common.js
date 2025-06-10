@@ -2,6 +2,7 @@ import path from "path";
 import HtmlWebpackPlugin from "html-webpack-plugin";
 import { fileURLToPath } from "url";
 import { dirname } from "path";
+import MiniCssExtractPlugin from "mini-css-extract-plugin";
 
 // Simulate __dirname in ESM
 const __filename = fileURLToPath(import.meta.url);
