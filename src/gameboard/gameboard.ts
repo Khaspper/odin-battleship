@@ -8,12 +8,15 @@ interface IGameboard {
     ship: IShip
   ) => boolean;
   receiveAttack: (x: number, y: number) => boolean;
+  allShipsSunken: () => boolean;
+  getRemainingShips: () => Set<IShip>;
   printMap: () => void;
 }
 
 export function gameBoard(): IGameboard {
   const map = new Map<string, IShip>();
   const shots = new Set<string>();
+  const remainingShips = new Set<IShip>();
 
   function formatCoord(x: number, y: number): string {
     return `${x},${y}`;
@@ -55,6 +58,7 @@ export function gameBoard(): IGameboard {
     for (const c of coords) {
       map.set(c, ship);
     }
+    remainingShips.add(ship);
     return true;
   }
 
@@ -64,6 +68,17 @@ export function gameBoard(): IGameboard {
     if (length === 2) return "Patrol Boat";
     if (map.has("Destroyer")) return "Submarine";
     return "Destroyer";
+  }
+
+  //TODO: Hello future Mark! All you have to do right now is
+  //TODO: Implement an attackShip function that hits the ship
+  //TODO: checks if the ship sunken
+  function attackShip(ship: IShip, coordinate: string): void {
+    ship.hit();
+    map.delete(coordinate);
+    if (ship.getIsSunk()) {
+      remainingShips.delete(ship);
+    }
   }
 
   return {
@@ -92,8 +107,7 @@ export function gameBoard(): IGameboard {
       // It's a hit
       if (map.has(coordinate)) {
         const ship = map.get(coordinate) as IShip;
-        ship.hit();
-        map.delete(coordinate);
+        attackShip(ship, coordinate);
         shots.add(coordinate);
         return true;
       }
@@ -103,8 +117,27 @@ export function gameBoard(): IGameboard {
       return false;
     },
 
+    //TODO: You also should implement a function that reports
+    //TODO: whether or not all of their ships have been sunken
+    allShipsSunken(): boolean {
+      //! Do not delete this
+      // I do not know if this function should be private or not...
+      // Kanye: "I guess we'll never know"
+      //! Do not delete this
+
+      if (remainingShips.size === 0) {
+        console.log("All ships have been sunk");
+        return true;
+      }
+      return false;
+    },
+
     printMap(): void {
       console.log("Map: ", map);
+    },
+
+    getRemainingShips(): Set<IShip> {
+      return remainingShips;
     },
   };
 }
