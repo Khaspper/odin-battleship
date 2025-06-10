@@ -7,10 +7,13 @@ interface IGameboard {
     horizontal: boolean,
     ship: IShip
   ) => boolean;
+  receiveAttack: (x: number, y: number) => boolean;
+  printMap: () => void;
 }
 
 export function gameBoard(): IGameboard {
   const map = new Map<string, IShip>();
+  const shots = new Set<string>();
 
   function formatCoord(x: number, y: number): string {
     return `${x},${y}`;
@@ -81,6 +84,27 @@ export function gameBoard(): IGameboard {
 
       name = getShipName(ship.getLength());
       return true;
+    },
+
+    receiveAttack(x: number, y: number): boolean {
+      const coordinate = formatCoord(x, y);
+
+      // It's a hit
+      if (map.has(coordinate)) {
+        const ship = map.get(coordinate) as IShip;
+        ship.hit();
+        map.delete(coordinate);
+        shots.add(coordinate);
+        return true;
+      }
+
+      shots.add(coordinate);
+      // It's a miss
+      return false;
+    },
+
+    printMap(): void {
+      console.log("Map: ", map);
     },
   };
 }
