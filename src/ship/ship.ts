@@ -1,4 +1,4 @@
-interface IShip {
+export interface IShip {
   hit: () => void;
   getLength: () => number;
   getHealth: () => number;
