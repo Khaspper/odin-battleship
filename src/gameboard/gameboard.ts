@@ -62,14 +62,6 @@ export function gameBoard(): IGameboard {
     return true;
   }
 
-  function getShipName(length: number): string {
-    if (length === 5) return "Carrier";
-    if (length === 4) return "Battleship";
-    if (length === 2) return "Patrol Boat";
-    if (map.has("Destroyer")) return "Submarine";
-    return "Destroyer";
-  }
-
   //TODO: Hello future Mark! All you have to do right now is
   //TODO: Implement an attackShip function that hits the ship
   //TODO: checks if the ship sunken
@@ -86,7 +78,6 @@ export function gameBoard(): IGameboard {
     placeShip(x: number, y: number, horizontal: boolean, ship: IShip): boolean {
       if (x < 1 || x > 10 || y > 10 || y < 1) return false;
       let value: Set<string>;
-      let name: string;
 
       //? Vertical
       if (!horizontal) {
@@ -97,8 +88,6 @@ export function gameBoard(): IGameboard {
         value = placeShipHorizontally(x, y, ship.getLength());
       }
       if (!registerShip(value, ship)) return false;
-
-      name = getShipName(ship.getLength());
       return true;
     },
 
