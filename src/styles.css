@@ -1,26 +1,60 @@
+/* CSS RESET BY DIGITAL OCEAN */
+html {
+  box-sizing: border-box;
+  font-size: 16px;
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ol,
+ul {
+  margin: 0;
+  padding: 0;
+  font-weight: normal;
+}
+
+ol,
+ul {
+  list-style: none;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+/* CSS RESET BY DIGITAL OCEAN */
+
 body {
-  background-color: #686868;
-
+  background: radial-gradient(#0c0075, #050030);
+  height: 100vh;
   display: flex;
-  flex-direction: column;
-  gap: 50px;
+  justify-content: center;
+  align-items: center;
 }
 
-.player-1 {
-  background-color: #337939;
-}
-
-.player-2 {
-  background-color: #4a0f0f;
+.board-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 5vw;
 }
 
 .board {
-  outline: auto red;
-  width: 700px;
-  height: 700px;
+  border: 2px solid black;
+  width: clamp(300px, 30vw, 700px);
+  height: clamp(300px, 30vw, 700px);
 
   display: flex;
   flex-direction: column;
+  margin: 10px;
 }
 
 .row {
@@ -29,6 +63,16 @@ body {
 }
 
 .cell {
-  outline: auto green;
+  border: clamp(0.5px, 0.5vw, 1px) solid white;
+  margin: 1px;
   flex: 1;
+}
+
+.player-1-title,
+.enemy-title {
+  font-family: Roboto, sans-serif;
+  font-size: 30px;
+  font-weight: bold;
+  text-align: center;
+  color: white;
 }
