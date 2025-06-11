@@ -46,7 +46,7 @@ if (
 //! This is temporary
 
 //? Event listener for boards
-const playerOneBoard = document.querySelector(".board");
+const playerOneBoard = document.querySelector(".player-2.board");
 playerOneBoard?.addEventListener("click", (e: Event) => {
   const target = e.target as HTMLInputElement;
   //? First is the row number
@@ -58,5 +58,19 @@ playerOneBoard?.addEventListener("click", (e: Event) => {
   console.log(playerTwo.board.receiveAttack(row, col));
   playerTwo.board.allShipsSunken();
   // playerTwo.board.printMap();
+});
+
+const playerTwoBoard = document.querySelector(".player-1.board");
+playerTwoBoard?.addEventListener("click", (e: Event) => {
+  const target = e.target as HTMLInputElement;
+  //? First is the row number
+  //? Second is the col number
+  const row: number = parseInt(target.id.split(" ")[1].split("-")[1]);
+  const col: number = parseInt(target.id.split(" ")[0].split("-")[1]);
+
+  console.log(row, col);
+  console.log(playerOne.board.receiveAttack(row, col));
+  playerOne.board.allShipsSunken();
+  // playerOne.board.printMap();
 });
 //? Event listener for boards
