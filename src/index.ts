@@ -3,7 +3,7 @@ import { createPlayer, IPlayer } from "./player/player";
 import { createShip, IShip } from "./ship/ship";
 
 const playerOne: IPlayer = createPlayer();
-const playerTwo: IPlayer = createPlayer();
+const enemy: IPlayer = createPlayer();
 
 // Adding ships to players
 const playerOneShips: IShip[] = [
@@ -14,7 +14,7 @@ const playerOneShips: IShip[] = [
   createShip(2),
 ];
 
-const playerTwoShips: IShip[] = [
+const enemyShips: IShip[] = [
   createShip(5),
   createShip(4),
   createShip(3),
@@ -35,19 +35,19 @@ if (
 }
 
 if (
-  playerTwo.board.placeShip(5, 1, true, playerTwoShips[0]) &&
-  playerTwo.board.placeShip(10, 5, false, playerTwoShips[1]) &&
-  playerTwo.board.placeShip(10, 10, true, playerTwoShips[2]) &&
-  playerTwo.board.placeShip(8, 3, false, playerTwoShips[3]) &&
-  playerTwo.board.placeShip(4, 4, true, playerTwoShips[4])
+  enemy.board.placeShip(5, 1, true, enemyShips[0]) &&
+  enemy.board.placeShip(10, 5, false, enemyShips[1]) &&
+  enemy.board.placeShip(10, 10, true, enemyShips[2]) &&
+  enemy.board.placeShip(8, 3, false, enemyShips[3]) &&
+  enemy.board.placeShip(4, 4, true, enemyShips[4])
 ) {
-  console.log("Placed playerTwos ships");
+  console.log("Placed enemy's ships");
 }
 //! This is temporary
 
 //? Event listener for boards
-const playerOneBoard = document.querySelector(".player-2.board");
-playerOneBoard?.addEventListener("click", (e: Event) => {
+const enemyBoard = document.querySelector(".enemy-board");
+enemyBoard?.addEventListener("click", (e: Event) => {
   const target = e.target as HTMLInputElement;
   //? First is the row number
   //? Second is the col number
@@ -55,22 +55,9 @@ playerOneBoard?.addEventListener("click", (e: Event) => {
   const col: number = parseInt(target.id.split(" ")[0].split("-")[1]);
 
   console.log(row, col);
-  console.log(playerTwo.board.receiveAttack(row, col));
-  playerTwo.board.allShipsSunken();
-  // playerTwo.board.printMap();
+  console.log(enemy.board.receiveAttack(row, col));
+  enemy.board.allShipsSunken();
+  // enemy.board.printMap();
 });
 
-const playerTwoBoard = document.querySelector(".player-1.board");
-playerTwoBoard?.addEventListener("click", (e: Event) => {
-  const target = e.target as HTMLInputElement;
-  //? First is the row number
-  //? Second is the col number
-  const row: number = parseInt(target.id.split(" ")[1].split("-")[1]);
-  const col: number = parseInt(target.id.split(" ")[0].split("-")[1]);
-
-  console.log(row, col);
-  console.log(playerOne.board.receiveAttack(row, col));
-  playerOne.board.allShipsSunken();
-  // playerOne.board.printMap();
-});
 //? Event listener for boards
