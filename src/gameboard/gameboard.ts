@@ -1,6 +1,6 @@
 import type { IShip } from "../ship/ship.ts";
 
-interface IGameboard {
+export interface IGameboard {
   placeShip: (
     x: number,
     y: number,
