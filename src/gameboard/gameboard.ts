@@ -10,10 +10,12 @@ export interface IGameboard {
   receiveAttack: (x: number, y: number) => boolean;
   allShipsSunken: () => boolean;
   getRemainingShips: () => Set<IShip>;
+  buildBoard: () => HTMLElement;
+  renderShips: () => void;
   printMap: () => void;
 }
 
-export function gameBoard(): IGameboard {
+export function gameBoard(board: HTMLElement): IGameboard {
   const map = new Map<string, IShip>();
   const shots = new Set<string>();
   const remainingShips = new Set<IShip>();
@@ -120,6 +122,31 @@ export function gameBoard(): IGameboard {
         return true;
       }
       return false;
+    },
+
+    renderShips(): void {
+      this.printMap();
+      for (const c of map.keys()) {
+        const coord = c.split(",");
+        console.log(coord[0], coord[1]);
+        const cell = document.getElementById(`col-${coord[1]} row-${coord[0]}`);
+        cell?.classList.add("ship");
+      }
+    },
+
+    buildBoard(): HTMLElement {
+      for (let i = 1; i <= 10; i++) {
+        const row = document.createElement("div");
+        row.classList.add("row");
+        for (let j = 1; j <= 10; j++) {
+          const cell = document.createElement("div");
+          cell.classList.add("cell");
+          cell.id = `col-${i} row-${j}`;
+          row.appendChild(cell);
+        }
+        board.appendChild(row);
+      }
+      return board;
     },
 
     printMap(): void {

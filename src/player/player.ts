@@ -4,9 +4,8 @@ export interface IPlayer {
   board: IGameboard;
 }
 
-export function createPlayer(): IPlayer {
-  const board = gameBoard();
+export function createPlayer(board: HTMLElement): IPlayer {
   return {
-    board,
+    board: gameBoard(board),
   };
 }
