@@ -77,6 +77,7 @@ export function gameBoard(): IGameboard {
     ship.hit();
     map.delete(coordinate);
     if (ship.getIsSunk()) {
+      console.log("Ship is sunken");
       remainingShips.delete(ship);
     }
   }

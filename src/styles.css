@@ -1,3 +1,18 @@
-h1 {
-  color: rgb(255, 0, 0);
+.board {
+  outline: auto red;
+  width: 700px;
+  height: 700px;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.row {
+  flex: 1;
+  display: flex;
+}
+
+.cell {
+  outline: auto green;
+  flex: 1;
 }

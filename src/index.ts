@@ -44,3 +44,19 @@ if (
   console.log("Placed playerTwos ships");
 }
 //! This is temporary
+
+//? Event listener for boards
+const playerOneBoard = document.querySelector(".board");
+playerOneBoard?.addEventListener("click", (e: Event) => {
+  const target = e.target as HTMLInputElement;
+  //? First is the row number
+  //? Second is the col number
+  const row: number = parseInt(target.id.split(" ")[1].split("-")[1]);
+  const col: number = parseInt(target.id.split(" ")[0].split("-")[1]);
+
+  console.log(row, col);
+  console.log(playerTwo.board.receiveAttack(row, col));
+  playerTwo.board.allShipsSunken();
+  // playerTwo.board.printMap();
+});
+//? Event listener for boards
