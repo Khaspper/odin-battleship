@@ -80,3 +80,7 @@ body {
 .ship {
   background-color: #00950c;
 }
+
+.enemy-board > .shot {
+  background-color: #ff0000;
+}

@@ -1,5 +1,5 @@
-// import { gameBoard } from "./gameboard";
-// import { createShip } from "../ship/ship";
+import { gameBoard } from "./gameboard";
+import { createShip } from "../ship/ship";
 
 // let board: ReturnType<typeof gameBoard>;
 // beforeEach(() => {
@@ -235,8 +235,4 @@
 //     expect(board.allShipsSunken()).toBeTruthy();
 //   });
 // });
-// //? These are to check if ships are sunken ?//
-
-// //? These are to check if ships are sunken ?//
-
 // //? These are to check if ships are sunken ?//

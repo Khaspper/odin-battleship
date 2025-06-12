@@ -12,6 +12,7 @@ export interface IGameboard {
   getRemainingShips: () => Set<IShip>;
   buildBoard: () => HTMLElement;
   renderShips: () => void;
+  renderPlayerOneShots: () => string;
   printMap: () => void;
 }
 
@@ -95,16 +96,16 @@ export function gameBoard(board: HTMLElement): IGameboard {
 
     receiveAttack(x: number, y: number): boolean {
       const coordinate = formatCoord(x, y);
+      shots.add(coordinate);
+      this.renderPlayerOneShots();
 
       // It's a hit
       if (map.has(coordinate)) {
         const ship = map.get(coordinate) as IShip;
         attackShip(ship, coordinate);
-        shots.add(coordinate);
         return true;
       }
 
-      shots.add(coordinate);
       // It's a miss
       return false;
     },
@@ -124,12 +125,19 @@ export function gameBoard(board: HTMLElement): IGameboard {
       return false;
     },
 
+    renderPlayerOneShots(): string {
+      const coord = [...shots].at(-1)?.split(",") as string[];
+      const enemyBoard = document.querySelector(".enemy-board");
+
+      console.log(coord);
+      return [...shots].at(-1) as string;
+    },
+
     renderShips(): void {
-      this.printMap();
       for (const c of map.keys()) {
         const coord = c.split(",");
-        console.log(coord[0], coord[1]);
-        const cell = document.getElementById(`col-${coord[1]} row-${coord[0]}`);
+        const cell = document.querySelector(`.col-${coord[1]}.row-${coord[0]}`);
+        console.log(cell);
         cell?.classList.add("ship");
       }
     },
@@ -141,7 +149,7 @@ export function gameBoard(board: HTMLElement): IGameboard {
         for (let j = 1; j <= 10; j++) {
           const cell = document.createElement("div");
           cell.classList.add("cell");
-          cell.id = `col-${i} row-${j}`;
+          cell.classList.add(`col-${i}.row-${j}`);
           row.appendChild(cell);
         }
         board.appendChild(row);

@@ -101,8 +101,12 @@ enemyBoard?.addEventListener("click", (e: Event) => {
   const target = e.target as HTMLInputElement;
   //? First is the row number
   //? Second is the col number
-  const row: number = parseInt(target.id.split(" ")[1].split("-")[1]);
-  const col: number = parseInt(target.id.split(" ")[0].split("-")[1]);
+  const row: number = parseInt(
+    target.classList.value.split(" ")[1].split(",")[1].split("-")[1]
+  );
+  const col: number = parseInt(
+    target.classList.value.split(" ")[1].split(",")[0].split("-")[1]
+  );
 
   console.log(row, col);
   console.log(enemy.board.receiveAttack(row, col));
